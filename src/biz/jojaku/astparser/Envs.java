@@ -2,6 +2,11 @@ package biz.jojaku.astparser;
 
 import java.io.File;
 
+/**
+ * 
+ * @author satanabe1
+ *
+ */
 public class Envs {
 
 	public static final String UTF_8 = "UTF-8";

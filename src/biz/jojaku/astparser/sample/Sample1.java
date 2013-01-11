@@ -10,19 +10,18 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
 
 import biz.jojaku.astparser.SourceFile;
 import biz.jojaku.astparser.Envs;
-import biz.jojaku.astparser.sample.visitor.SampleVisitor1;
+import biz.jojaku.astparser.sample.visitor.*;
 
 /**
  * クラス名やフィールド，メソッドの概要を表示するサンプル
  * 
- * @author satoshi-ssl
+ * @author satanabe1
  * 
  */
 public class Sample1 {
+	private static ASTVisitor visitor = new SampleVisitor1();
 
 	public static void main(String[] args) throws Exception {
-		ASTVisitor visitor = new SampleVisitor1();
-
 		SourceFile sourceFile = new SourceFile("src" + File.separator
 				+ "samples" + File.separator + "AntFileGen.java");
 		CompilationUnit unit;
@@ -45,7 +44,7 @@ public class Sample1 {
 		astParser.setUnitName(sourceFile.getFilePath());// なんでもいいから名前を設定しておく
 		astParser.setSource(sourceFile.getSourceCode().toCharArray());// 解析対象コードを設定する
 		unit = (CompilationUnit) astParser.createAST(new NullProgressMonitor());
-		// unit.recordModifications();
+		unit.recordModifications();// ASTへの操作履歴のようなものを有効に
 		// 解析実行
 		unit.accept(visitor);
 	}

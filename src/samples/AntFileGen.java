@@ -19,8 +19,7 @@ import org.w3c.dom.Text;
  * XMLの文字列を生成するクラス
  * 
  */
-public final class AntFileGen implements java.io.Serializable,
-		java.lang.Cloneable {
+public final class AntFileGen implements java.lang.Cloneable {
 	private String projectName = "ProjectName";
 	private String baseDir = ".", srcDir = "src", classDir = "classes";
 	private String srcEncoding = "utf8";

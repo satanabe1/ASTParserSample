@@ -5,6 +5,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * 
+ * 
+ * @author satanabe1
+ *
+ */
 public class SourceFile {
 
 	private String path;

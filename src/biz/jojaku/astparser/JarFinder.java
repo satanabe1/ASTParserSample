@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 /**
  * ASTParserを使うために必要なjarファイルのパスを調べるクラス<br>
  * 
- * @author wtnbsts
+ * @author satanabe1
  * 
  */
 public class JarFinder {

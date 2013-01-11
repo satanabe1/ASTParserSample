@@ -15,7 +15,7 @@ import biz.jojaku.astparser.PrintUtil;
 /**
  * クラス名やフィールド，メソッドの概要を表示するサンプル
  * 
- * @author satoshi-ssl
+ * @author satanabe1
  * 
  */
 public class SampleVisitor1 extends ASTVisitor {
