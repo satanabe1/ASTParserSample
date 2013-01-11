@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ~/.vim/skels/skel.build.xml -->
+<project name="master" default="main" basedir="." >
+
+    <property name="src.dir" location="src"/><!-- java source -->
+    <property name="class.dir" location="classes"/><!-- java class -->
+    <property name="jar.dir" location="jar" />
+    <property name="jar.name" value="astpsample.jar" />
+
+    <property name="src.encoding" value="utf8"/><!-- source encoding -->
+    <property name="src.version" value="1.6"/><!-- source version -->
+
+    <target name="main" depends="init, compile, compress">
+        <echo>BuildNumber:&lt;${build.number}&gt;</echo>
+    </target>
+
+    <target name="init">
+        <buildnumber />
+        <tstamp />
+        <mkdir dir="${class.dir}" />
+        <mkdir dir="${jar.dir}" />
+        <delete>
+            <fileset dir="${class.dir}" includes="**/*.class" />
+            <fileset dir="${jar.dir}" includes="**/*.jar" />
+        </delete>
+    </target>
+
+    <target name="compile">
+        <javac
+            fork="true"
+            memoryInitialSize="1g"
+            memoryMaximumSize="1g"
+            srcdir="${src.dir}"
+            destdir="${class.dir}"
+            source="${src.version}"
+            target="${src.version}"
+            encoding="${src.encoding}"
+            debug="on"
+            includeAntRuntime="on">
+        </javac>
+    </target>
+
+    <target name="compress">
+        <jar destfile="${jar.dir}/${jar.name}" basedir="${class.dir}" includes="**/*.*">
+            <manifest>
+                <attribute name="Author" value="${user.name}" />
+                <attribute name="Main-Class" value="biz.jojaku.astparser.JarFinder"/>
+                <section name="Copyright">
+                    <attribute name="Copy" value="(C) " />
+                </section>
+            </manifest>
+        </jar>
+    </target>
+</project>
+
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="/Lib/astparser/common_3.6.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser/contenttype_3.4.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser/jdt.core_3.7.jar" sourcepath="/Lib/docs/astparser/org.eclipse.jdt.core.source_3.7.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser/jface_3.8.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser/jface.text_3.7.jar" sourcepath="/Lib/docs/astparser/org.eclipse.jface.text.source_3.7.2.v20111213-1208.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser/jobs_3.5.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser/osgi_3.7.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser/preferences_3.4.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser/resources_3.7.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser/runtime_3.7.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser/text_3.5.jar" sourcepath="/Lib/docs/astparser/org.eclipse.jface.text.source_3.7.2.v20111213-1208.jar"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>
