@@ -1,4 +1,8 @@
-package biz.jojaku.astparser.sample;
+package info.haxahaxa.astparser.sample;
+
+import info.haxahaxa.astparser.Envs;
+import info.haxahaxa.astparser.SourceFile;
+import info.haxahaxa.astparser.sample.visitor.*;
 
 import java.io.File;
 
@@ -10,9 +14,6 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jface.text.Document;
 import org.eclipse.text.edits.TextEdit;
 
-import biz.jojaku.astparser.Envs;
-import biz.jojaku.astparser.SourceFile;
-import biz.jojaku.astparser.sample.visitor.*;
 
 /**
  * パッケージと，クラス名と，親クラスと，インターフェースを変更するサンプル

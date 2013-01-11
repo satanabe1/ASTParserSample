@@ -1,4 +1,4 @@
-package biz.jojaku.astparser.sample.visitor;
+package info.haxahaxa.astparser.sample.visitor;
 
 import java.util.ArrayList;
 import java.util.List;

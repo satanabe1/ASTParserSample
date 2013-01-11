@@ -1,4 +1,4 @@
-package biz.jojaku.astparser;
+package info.haxahaxa.astparser;
 
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.Modifier;

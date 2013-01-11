@@ -1,4 +1,4 @@
-package biz.jojaku.astparser.sample;
+package info.haxahaxa.astparser.sample;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
 

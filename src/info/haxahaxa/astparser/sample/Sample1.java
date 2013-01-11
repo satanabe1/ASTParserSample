@@ -1,4 +1,8 @@
-package biz.jojaku.astparser.sample;
+package info.haxahaxa.astparser.sample;
+
+import info.haxahaxa.astparser.Envs;
+import info.haxahaxa.astparser.SourceFile;
+import info.haxahaxa.astparser.sample.visitor.*;
 
 import java.io.File;
 
@@ -8,9 +12,6 @@ import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
-import biz.jojaku.astparser.SourceFile;
-import biz.jojaku.astparser.Envs;
-import biz.jojaku.astparser.sample.visitor.*;
 
 /**
  * クラス名やフィールド，メソッドの概要を表示するサンプル

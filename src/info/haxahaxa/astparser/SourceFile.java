@@ -1,4 +1,4 @@
-package biz.jojaku.astparser;
+package info.haxahaxa.astparser;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

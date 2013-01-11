@@ -1,4 +1,4 @@
-package biz.jojaku.astparser.sample.visitor;
+package info.haxahaxa.astparser.sample.visitor;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.FieldDeclaration;

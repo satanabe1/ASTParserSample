@@ -1,4 +1,6 @@
-package biz.jojaku.astparser.sample.visitor;
+package info.haxahaxa.astparser.sample.visitor;
+
+import info.haxahaxa.astparser.PrintUtil;
 
 import java.util.List;
 
@@ -10,7 +12,6 @@ import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 
-import biz.jojaku.astparser.PrintUtil;
 
 /**
  * クラス名やフィールド，メソッドの概要を表示するサンプル
