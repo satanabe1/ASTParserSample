@@ -53,14 +53,14 @@ public class SampleVisitor3 extends ASTVisitor {
 		AST ast = node.getAST();
 		node.superInterfaceTypes().clear();// 古いインターフェースを全て削除
 		for (String interfaceName : newInterfaceNames) {
-			Name name = ast.newName(interfaceName);// 新しいノードを作って・・・
+			Name name = ast.newName(interfaceName);// 新しい名前を作って・・・
 			Type interfaceType = ast.newSimpleType(name);
 			node.superInterfaceTypes().add(interfaceType);// インターフェースのリストに追加する
 		}
 	}
 
 	/**
-	 * 無駄情報削減の為にメソッド宣言を削除
+	 * 出力される無駄な情報を削減する為にメソッド宣言を削除
 	 */
 	public boolean visit(MethodDeclaration node) {
 		node.delete();

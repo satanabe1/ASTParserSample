@@ -36,6 +36,12 @@ public class JarFinder {
 			// }
 			System.out.println("CLASSPATH : "
 					+ generateClasspathString(jarFiles));
+			System.out.println();
+			for (File jar : jarFiles) {
+				System.out.println("cp " + jar.getCanonicalPath()
+						+ " ${ASTPARSER_LIB}/");
+			}
+
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

@@ -14,7 +14,6 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jface.text.Document;
 import org.eclipse.text.edits.TextEdit;
 
-
 /**
  * importを削除したり，メソッドを削除したり，フィールドを削除したり，javadocコメントを削除するサンプル
  * 

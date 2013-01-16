@@ -2,16 +2,16 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="/Lib/astparser/common_3.6.jar"/>
-	<classpathentry kind="lib" path="/Lib/astparser/contenttype_3.4.jar"/>
-	<classpathentry kind="lib" path="/Lib/astparser/jdt.core_3.7.jar" sourcepath="/Lib/docs/astparser/org.eclipse.jdt.core.source_3.7.jar"/>
-	<classpathentry kind="lib" path="/Lib/astparser/jface_3.8.jar"/>
-	<classpathentry kind="lib" path="/Lib/astparser/jface.text_3.7.jar" sourcepath="/Lib/docs/astparser/org.eclipse.jface.text.source_3.7.2.v20111213-1208.jar"/>
-	<classpathentry kind="lib" path="/Lib/astparser/jobs_3.5.jar"/>
-	<classpathentry kind="lib" path="/Lib/astparser/osgi_3.7.jar"/>
-	<classpathentry kind="lib" path="/Lib/astparser/preferences_3.4.jar"/>
-	<classpathentry kind="lib" path="/Lib/astparser/resources_3.7.jar"/>
-	<classpathentry kind="lib" path="/Lib/astparser/runtime_3.7.jar"/>
-	<classpathentry kind="lib" path="/Lib/astparser/text_3.5.jar" sourcepath="/Lib/docs/astparser/org.eclipse.jface.text.source_3.7.2.v20111213-1208.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser_4.3/org.eclipse.core.contenttype_3.4.200.v20120523-2004.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser_4.3/org.eclipse.core.jobs_3.5.300.v20120912-155018.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser_4.3/org.eclipse.core.resources_3.8.100.v20121214-121812.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser_4.3/org.eclipse.core.runtime_3.9.0.v20121004-163638.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser_4.3/org.eclipse.equinox.common_3.6.100.v20120522-1841.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser_4.3/org.eclipse.equinox.preferences_3.5.0.v20120918-182152.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser_4.3/org.eclipse.jdt.core_3.9.0.v20121208-144805.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser_4.3/org.eclipse.jface_3.8.200.v20121212-113328.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser_4.3/org.eclipse.jface.text_3.8.100.v20121126-164058.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser_4.3/org.eclipse.osgi_3.9.0.v20121210-201226.jar"/>
+	<classpathentry kind="lib" path="/Lib/astparser_4.3/org.eclipse.text_3.5.300.v20121210-150853.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

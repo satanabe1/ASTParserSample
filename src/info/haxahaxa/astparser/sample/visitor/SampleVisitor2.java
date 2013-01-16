@@ -7,21 +7,12 @@ import org.eclipse.jdt.core.dom.Javadoc;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 
 /**
- * メソッドを削除したり，フィールドを削除するサンプル
+ * メソッドの中身を削除したり，フィールドを削除するサンプル
  * 
  * @author satanabe1
  * 
  */
 public class SampleVisitor2 extends ASTVisitor {
-
-	/**
-	 * メソッド宣言をdelete!
-	 */
-	public boolean visit(MethodDeclaration node) {
-		node.delete();
-		return super.visit(node);
-	}
-
 	/**
 	 * フィールド宣言をdelete!
 	 */
@@ -43,6 +34,14 @@ public class SampleVisitor2 extends ASTVisitor {
 	 */
 	public boolean visit(ImportDeclaration node) {
 		node.delete();
+		return super.visit(node);
+	}
+
+	/**
+	 * メソッド内の処理をdelete!
+	 */
+	public boolean visit(MethodDeclaration node) {
+		node.getBody().statements().clear();
 		return super.visit(node);
 	}
 }
