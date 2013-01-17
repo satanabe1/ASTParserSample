@@ -7,7 +7,7 @@ import org.eclipse.jdt.core.dom.Javadoc;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 
 /**
- * メソッドの中身を削除したり，フィールドを削除するサンプル
+ * メソッドの中身を削除したり，フィールドを削除する
  * 
  * @author satanabe1
  * 

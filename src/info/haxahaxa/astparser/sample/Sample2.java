@@ -15,7 +15,7 @@ import org.eclipse.jface.text.Document;
 import org.eclipse.text.edits.TextEdit;
 
 /**
- * importを削除したり，メソッドを削除したり，フィールドを削除したり，javadocコメントを削除するサンプル
+ * メソッドの中身を削除したり，フィールドを削除する
  * 
  * @author satanabe1
  * 

@@ -16,14 +16,13 @@ import org.eclipse.text.edits.TextEdit;
 
 /**
  * コード生成サンプル<br>
- * メソッド内に変数宣言を追加する<br>
- * 配列やGenericsの変数を生成したり
+ * 新しくフィールドを追加したり、メソッドを追加したりする
  * 
  * @author satanabe1
  * 
  */
-public class Sample4 {
-	private static ASTVisitor visitor = new SampleVisitor4();
+public class Sample5 {
+	private static ASTVisitor visitor = new SampleVisitor5();
 
 	public static void main(String[] arg) throws Exception {
 		SourceFile sourceFile = new SourceFile("src" + File.separator
