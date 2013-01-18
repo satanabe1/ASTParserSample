@@ -81,7 +81,9 @@ public class SampleVisitor5 extends ASTVisitor {
 		return Pattern.matches(".*<.*>", typeName);
 	}
 
-	private Type getType(String typeName) {
+	private Type getType(AST ast, String typeName) {
+		
 		return null;
 	}
+
 }

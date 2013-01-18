@@ -1,4 +1,4 @@
-package info.haxahaxa.astparser;
+package info.haxahaxa.astparser.util;
 
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.Modifier;
@@ -9,7 +9,7 @@ import org.eclipse.jdt.core.dom.Modifier.ModifierKeyword;
  * @author satanabe1
  * 
  */
-public class PrintUtil {
+public class Print {
 	private static final String STYLE_TITLE = Envs.getLineSeparator()
 			+ "/* ===================================================== * "
 			+ Envs.getLineSeparator() //

@@ -1,8 +1,8 @@
 package info.haxahaxa.astparser.sample;
 
-import info.haxahaxa.astparser.Envs;
-import info.haxahaxa.astparser.SourceFile;
 import info.haxahaxa.astparser.sample.visitor.*;
+import info.haxahaxa.astparser.util.Envs;
+import info.haxahaxa.astparser.util.SourceFile;
 
 import java.io.File;
 
