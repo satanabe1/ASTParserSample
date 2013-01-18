@@ -4,6 +4,8 @@ import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.ParameterizedType;
+import org.eclipse.jdt.core.dom.PrimitiveType;
+import org.eclipse.jdt.core.dom.PrimitiveType.Code;
 import org.eclipse.jdt.core.dom.Type;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
@@ -22,9 +24,9 @@ public class SampleVisitor4 extends ASTVisitor {
 	public boolean visit(MethodDeclaration node) {
 		AST ast = node.getAST();
 
-		// Hogeクラスの変数fugaの宣言を追加する
-		VariableDeclarationFragment hogefuga = addVariableDec(node, "Hoge",
-				"fuga");
+		// boolean型の変数fugaの宣言を追加する
+		VariableDeclarationFragment hogefuga = addVariableDec(node,
+				PrimitiveType.BOOLEAN, "fuga");
 
 		// Mogeクラスの変数piyoの宣言を追加する
 		VariableDeclarationFragment mogepiyo = addVariableDec(node, "Moge",
@@ -35,7 +37,7 @@ public class SampleVisitor4 extends ASTVisitor {
 		// java.util.Map<String,Integer> map宣言を追加する
 		VariableDeclarationFragment listDecFragment = addVariableDec(node,
 				"java.util.Map", "map", new String[] { "String", "Integer" });
-		// 変数listをnullで初期化する
+		// 変数mapをnullで初期化する
 		listDecFragment.setInitializer(ast.newNullLiteral());
 
 		// int[][][] array宣言を追加する
@@ -47,6 +49,38 @@ public class SampleVisitor4 extends ASTVisitor {
 
 	/**
 	 * メソッドに対して普通の変数宣言を追加する<br>
+	 * ただしプリミティブ型専用<br>
+	 * ex: int num;
+	 * 
+	 * @param node
+	 *            弄りたいメソッド
+	 * @param primitiveType
+	 *            追加したい変数の型
+	 * @param fieldName
+	 *            追加したい変数の変数名
+	 * @return 追加した変数宣言<br>
+	 *         実際は"int num;"全体ではなく"num"の部分
+	 */
+	@SuppressWarnings("unchecked")
+	private VariableDeclarationFragment addVariableDec(MethodDeclaration node,
+			Code primitiveType, String fieldName) {
+		AST ast = node.getAST();
+		//
+		VariableDeclarationFragment vdFragment = ast
+				.newVariableDeclarationFragment();
+		vdFragment.setName(ast.newSimpleName(fieldName));
+		//
+		VariableDeclarationStatement vdStatement = ast
+				.newVariableDeclarationStatement(vdFragment);
+		vdStatement.setType(ast.newPrimitiveType(primitiveType));
+
+		node.getBody().statements().add(vdStatement);
+		return vdFragment;
+	}
+
+	/**
+	 * メソッドに対して普通の変数宣言を追加する<br>
+	 * ただしプリミティブ型以外<br>
 	 * ex: String str;
 	 * 
 	 * @param node
