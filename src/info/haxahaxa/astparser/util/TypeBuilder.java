@@ -31,8 +31,8 @@ public class TypeBuilder {
 	 * 
 	 * @param typeString
 	 *            生成したいクラスの文字列<br>
-	 *            ex: double<br>
-	 *            ex: Hoge[][]<br>
+	 *            ex: new TypeBuilder("double")<br>
+	 *            ex: new TypeBuilder("Hoge[][]")<br>
 	 * 
 	 */
 	public TypeBuilder(final String typeString) {
