@@ -13,7 +13,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 /**
  * コード生成サンプル<br>
  * メソッド内に変数宣言を追加する<br>
- * 配列やGenericsの変数を生成したり
+ * 配列やジェネリクスな変数を生成したり
  * 
  * @author satanabe1
  * 

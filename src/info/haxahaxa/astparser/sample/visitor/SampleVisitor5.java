@@ -1,18 +1,13 @@
 package info.haxahaxa.astparser.sample.visitor;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import info.haxahaxa.astparser.util.TypeBuilder;
 
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.Modifier;
-import org.eclipse.jdt.core.dom.PrimitiveType;
-import org.eclipse.jdt.core.dom.SimpleType;
-import org.eclipse.jdt.core.dom.Type;
+import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 
@@ -27,12 +22,17 @@ public class SampleVisitor5 extends ASTVisitor {
 
 	public boolean visit(TypeDeclaration node) {
 		// Hoge型フィールドfugaを private static で生成
-		addFieldDec(node, Modifier.PRIVATE, "Hoge", "fuga");
+		addFieldDec(node, Modifier.PRIVATE, "double", "fuga");
 
 		// Map<String, Integer>型メソッドmogeを生成
-		MethodDeclaration methodDeclaration = addMethodDec(node,
-				Modifier.PUBLIC | Modifier.SYNCHRONIZED,
-				"java.util.Map<String,Integer>", "moge");
+		addMethodDec(node, Modifier.SYNCHRONIZED,
+				"java.util.Map<List<String[]>, java.lang.Integer>[]", "moge");
+
+		// mogeメソッドの引数違いを生成する
+		addMethodDec(node, Modifier.SYNCHRONIZED,
+				"java.util.Map<List<String[]>, java.lang.Integer>[]", "moge",
+				"Argument", "arg1", "Argument[]", "arg2");
+
 		return super.visit(node);
 	}
 
@@ -46,16 +46,11 @@ public class SampleVisitor5 extends ASTVisitor {
 		vdFragment.setName(ast.newSimpleName(fieldName));
 		// 次にそれをフィールド宣言に入れる
 		FieldDeclaration fieldDec = ast.newFieldDeclaration(vdFragment);
-		fieldDec.setType(ast.newSimpleType(ast.newName(typeName)));
+		fieldDec.setType(new TypeBuilder(typeName).build(ast));
 		// フィールドにmodifierを追加する
 		fieldDec.modifiers().addAll(ast.newModifiers(modifiers));
 		node.bodyDeclarations().add(fieldDec);
 		return vdFragment;
-	}
-
-	private MethodDeclaration addMethodDec(TypeDeclaration node, int modifiers,
-			PrimitiveType returnType, String methodName) {
-		return null;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -63,27 +58,48 @@ public class SampleVisitor5 extends ASTVisitor {
 			String returnTypeName, String methodName) {
 		AST ast = node.getAST();
 
-		if (isGenericsType(returnTypeName)) {
-			System.out.println("HIT");
-			Pattern pattern = Pattern
-					.compile("(\"[^\"]*(?:\"\"[^\"]*)*\"|[^,]*),");
-		}
+		// メソッド宣言を作る時は、文字通りnewMethodDeclaration
 		MethodDeclaration methodDeclaration = ast.newMethodDeclaration();
-		methodDeclaration.modifiers().addAll(ast.newModifiers(modifiers));// mod
-		methodDeclaration.setReturnType2(ast.newSimpleType(ast
-				.newName(returnTypeName)));// type
+		// 修飾子を付けたい時は、newModifiersしてaddAllすればいい
+		methodDeclaration.modifiers().addAll(ast.newModifiers(modifiers));
+		// メソッドの戻り値の型はsetReturnType2！Type型で指定
+		methodDeclaration.setReturnType2(new TypeBuilder(returnTypeName)
+				.build(ast));
+		// 名前付け
 		methodDeclaration.setName(ast.newSimpleName(methodName));// name
+		// 最後にクラス宣言のbodyDeclarationsにaddして完成
 		node.bodyDeclarations().add(methodDeclaration);
 		return methodDeclaration;
 	}
 
-	private boolean isGenericsType(String typeName) {
-		return Pattern.matches(".*<.*>", typeName);
-	}
+	@SuppressWarnings("unchecked")
+	private MethodDeclaration addMethodDec(TypeDeclaration node, int modifiers,
+			String returnTypeName, String methodName, String... argments) {
+		AST ast = node.getAST();
 
-	private Type getType(AST ast, String typeName) {
-		
-		return null;
-	}
+		// メソッド宣言を作る時は、文字通りnewMethodDeclaration
+		MethodDeclaration methodDeclaration = ast.newMethodDeclaration();
+		// 修飾子を付けたい時は、newModifiersしてaddAllすればいい
+		methodDeclaration.modifiers().addAll(ast.newModifiers(modifiers));
+		// メソッドの戻り値の型はsetReturnType2！Type型で指定
+		methodDeclaration.setReturnType2(new TypeBuilder(returnTypeName)
+				.build(ast));
+		// 名前付け
+		methodDeclaration.setName(ast.newSimpleName(methodName));// name
 
+		// そして引数を追加する
+		if (argments.length % 2 == 1) {
+			throw new IllegalArgumentException("引数の型と名前の個数が変");
+		}
+		for (int i = 0; i < argments.length; i += 2) {
+			SingleVariableDeclaration argDec = ast
+					.newSingleVariableDeclaration();
+			argDec.setType(new TypeBuilder(argments[i]).build(ast));
+			argDec.setName(ast.newSimpleName(argments[i + 1]));
+			methodDeclaration.parameters().add(argDec);
+		}
+		// 最後にクラス宣言のbodyDeclarationsにaddして完成
+		node.bodyDeclarations().add(methodDeclaration);
+		return methodDeclaration;
+	}
 }
