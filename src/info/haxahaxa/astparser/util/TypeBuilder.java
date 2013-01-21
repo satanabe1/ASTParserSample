@@ -1,9 +1,12 @@
 package info.haxahaxa.astparser.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
@@ -37,20 +40,26 @@ public class TypeBuilder {
 	 */
 	public TypeBuilder(final String typeString) {
 		final List<Type> types = new ArrayList<Type>();
-		// 一応";"があったら弾く
+		// ";"が一つでもあれば弾く
 		if (typeString.contains(";")) {
 			throw new IllegalArgumentException(typeString);
 		}
 
 		Document doc = new Document("class tmpclass { " + typeString
 				+ " tmpfield;}\n");
+		// コンパイルオプションはsourceとtargetだけ1.7に
+		Map<String, String> comap = new HashMap<String, String>();
+		comap.put(JavaCore.COMPILER_SOURCE, "1.7");
+		comap.put(JavaCore.COMPILER_COMPLIANCE, "1.7");
 		ASTParser astParser = ASTParser.newParser(AST.JLS4);
+		astParser.setUnitName("tmpclass");
+		astParser.setCompilerOptions(comap);
 		astParser.setSource(doc.get().toCharArray());
 		CompilationUnit unit = (CompilationUnit) astParser
 				.createAST(new NullProgressMonitor());
 		unit.accept(new ASTVisitor() {
 			public boolean visit(FieldDeclaration node) {
-				// publicとかstaticとか、余計な修飾子がついてたらエラーにする
+				// publicとかstaticとか、余計な修飾子がついてたら弾く
 				if (Modifier.NONE != node.getModifiers()) {
 					throw new IllegalArgumentException(typeString);
 				}
@@ -59,6 +68,10 @@ public class TypeBuilder {
 			}
 		});
 
+		// IProblemが一つでもあれば弾く
+		if (unit.getProblems().length > 0) {
+			throw new IllegalArgumentException(typeString);
+		}
 		type = types.get(0);
 	}
 
