@@ -1,8 +1,5 @@
 package info.haxahaxa.astparser.sample.visitor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
@@ -22,24 +19,38 @@ public class SampleVisitor3 extends ASTVisitor {
 	public boolean visit(TypeDeclaration node) {
 		// クラス名を変更する
 		setClassName(node, "HogeHoge");
+
 		// 親クラスを変更する
 		setSuperClass(node, "java.applet.Applet");
 
 		// インターフェースを変更する
-		List<String> interfaceNames = new ArrayList<String>();
-		interfaceNames.add("java.io.Serializable");
-		interfaceNames.add("PiyoPiyo");
-		setSuperInterfaces(node, interfaceNames);
+		setSuperInterfaces(node, "java.io.Serializable", "PiyoPiyo");
 
 		return super.visit(node);
 	}
 
+	/**
+	 * クラス名を変更する
+	 * 
+	 * @param node
+	 *            変更したいクラス宣言ノード
+	 * @param simpleClassName
+	 *            変更したい名前
+	 */
 	private void setClassName(TypeDeclaration node, String simpleClassName) {
 		AST ast = node.getAST();
 		SimpleName simpleName = ast.newSimpleName(simpleClassName);
 		node.setName(simpleName);
 	}
 
+	/**
+	 * 親クラスを変更する
+	 * 
+	 * @param node
+	 *            変更したいクラス宣言ノード
+	 * @param superClassName
+	 *            継承したいクラス名
+	 */
 	private void setSuperClass(TypeDeclaration node, String superClassName) {
 		AST ast = node.getAST();
 		Name name = ast.newName(superClassName);
@@ -47,9 +58,17 @@ public class SampleVisitor3 extends ASTVisitor {
 		node.setSuperclassType(superClassType);
 	}
 
+	/**
+	 * インターフェースを変更する
+	 * 
+	 * @param node
+	 *            変更したいクラスノード
+	 * @param newInterfaceNames
+	 *            実装したいインターフェースの一覧
+	 */
 	@SuppressWarnings("unchecked")
 	private void setSuperInterfaces(TypeDeclaration node,
-			List<String> newInterfaceNames) {
+			String... newInterfaceNames) {
 		AST ast = node.getAST();
 		node.superInterfaceTypes().clear();// 古いインターフェースを全て削除
 		for (String interfaceName : newInterfaceNames) {

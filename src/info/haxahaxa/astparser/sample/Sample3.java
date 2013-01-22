@@ -16,7 +16,7 @@ import org.eclipse.text.edits.TextEdit;
 
 
 /**
- * パッケージと，クラス名と，親クラスと，インターフェースを変更するサンプル
+ * クラス名と，親クラスと，インターフェースを変更するサンプル
  * 
  * @author satanabe1
  * 
