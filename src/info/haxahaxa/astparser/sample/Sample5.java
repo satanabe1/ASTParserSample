@@ -42,7 +42,6 @@ public class Sample5 {
 		// 第三第四については何も考えず null, true ．納得いかない時はIBMのASTPa...
 		astParser.setEnvironment(Envs.getClassPath(), Envs.getSourcePath(),
 				null, true);
-
 		// 解析対象のソースコードの入力とか
 		astParser.setUnitName(sourceFile.getFilePath());// なんでもいいから名前を設定しておく
 		astParser.setSource(sourceFile.getSourceCode().toCharArray());// 解析対象コードを設定する

@@ -20,18 +20,23 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
  */
 public class SampleVisitor5 extends ASTVisitor {
 
+	/**
+	 * フィールドの追加や、メソッドの追加はクラスに対して行われるので、TypeDeclarationに引っ掛ける
+	 */
 	public boolean visit(TypeDeclaration node) {
 		// Hoge型フィールドfugaを private static で生成
-		addFieldDec(node, Modifier.PRIVATE, "double", "fuga");
+		addFieldDec(node, Modifier.PRIVATE | Modifier.STATIC, "double", "fuga");
 
 		// Map<String, Integer>型メソッドmogeを生成
-		addMethodDec(node, Modifier.SYNCHRONIZED,
-				"java.util.Map<List<String[]>, java.lang.Integer>[]", "moge");
+		MethodDeclaration methodDeclaration = addMethodDec(node,
+				Modifier.SYNCHRONIZED,
+				"java.util.Map<Integer,? extends String>", "moge");
 
-		// mogeメソッドの引数違いを生成する
-		addMethodDec(node, Modifier.SYNCHRONIZED,
-				"java.util.Map<List<String[]>, java.lang.Integer>[]", "moge",
-				"Argument", "arg1", "Argument[]", "arg2");
+		// 生成されたmogeメソッドに引数を付ける
+		addMethodParams(methodDeclaration, "int", "arg1", "String", "arg2");
+
+		// コンストラクタを生成
+		addConstructor(node, node.getModifiers());
 
 		return super.visit(node);
 	}
@@ -72,34 +77,42 @@ public class SampleVisitor5 extends ASTVisitor {
 		return methodDeclaration;
 	}
 
+	/**
+	 * MethodDeclarationのインスタンスに引数を追加する
+	 * 
+	 * @param params
+	 *            偶数番:型名<br>
+	 *            奇数番:変数名<br>
+	 */
 	@SuppressWarnings("unchecked")
-	private MethodDeclaration addMethodDec(TypeDeclaration node, int modifiers,
-			String returnTypeName, String methodName, String... argments) {
-		AST ast = node.getAST();
-
-		// メソッド宣言を作る時は、文字通りnewMethodDeclaration
-		MethodDeclaration methodDeclaration = ast.newMethodDeclaration();
-		// 修飾子を付けたい時は、newModifiersしてaddAllすればいい
-		methodDeclaration.modifiers().addAll(ast.newModifiers(modifiers));
-		// メソッドの戻り値の型はsetReturnType2！Type型で指定
-		methodDeclaration.setReturnType2(new TypeBuilder(returnTypeName)
-				.build(ast));
-		// 名前付け
-		methodDeclaration.setName(ast.newSimpleName(methodName));// name
-
-		// そして引数を追加する
-		if (argments.length % 2 == 1) {
-			throw new IllegalArgumentException("引数の型と名前の個数が変");
-		}
-		for (int i = 0; i < argments.length; i += 2) {
-			SingleVariableDeclaration argDec = ast
+	private void addMethodParams(MethodDeclaration methodDeclaration,
+			String... params) {
+		AST ast = methodDeclaration.getAST();
+		for (int i = 0; i < params.length; i += 2) {
+			SingleVariableDeclaration singleVariableDeclaration = ast
 					.newSingleVariableDeclaration();
-			argDec.setType(new TypeBuilder(argments[i]).build(ast));
-			argDec.setName(ast.newSimpleName(argments[i + 1]));
-			methodDeclaration.parameters().add(argDec);
+			// 型を指定
+			singleVariableDeclaration.setType(new TypeBuilder(params[i])
+					.build(ast));
+			// 変数名を指定
+			singleVariableDeclaration.setName(ast.newSimpleName(params[i + 1]));
+			methodDeclaration.parameters().add(singleVariableDeclaration);
 		}
-		// 最後にクラス宣言のbodyDeclarationsにaddして完成
+	}
+
+	@SuppressWarnings("unchecked")
+	private MethodDeclaration addConstructor(TypeDeclaration node, int modifiers) {
+		AST ast = node.getAST();
+		// メソッド宣言の生成
+		MethodDeclaration methodDeclaration = ast.newMethodDeclaration();
+		// 修飾子
+		methodDeclaration.modifiers().addAll(ast.newModifiers(modifiers));
+		// 名前
+		methodDeclaration.setName(ast.newSimpleName(node.getName().toString()));
+		// コンストラクタにする
+		methodDeclaration.setConstructor(true);
 		node.bodyDeclarations().add(methodDeclaration);
 		return methodDeclaration;
 	}
+
 }
