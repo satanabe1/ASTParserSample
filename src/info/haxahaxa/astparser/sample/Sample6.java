@@ -16,7 +16,7 @@ import org.eclipse.text.edits.TextEdit;
 
 /**
  * コード生成サンプル<br>
- * メソッド呼び出しと、戻り値の代入
+ * メソッド呼び出し
  * 
  * @author satanabe1
  * 
