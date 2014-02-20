@@ -6,8 +6,14 @@ public class TheWorld {
 	static Object obj2 = new Object();
 
 	public static void say(String arg) {
-
 		obj1.equals(obj2);
-		// System.out.println("TheWorld!" + arg);
+	}
+
+	public int get() {
+		return 1;
+	}
+
+	public TheWorld getWorld() {
+		return this;
 	}
 }
